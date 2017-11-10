@@ -10,7 +10,7 @@ vaultRepo = "TableHeat"
 vaultFolder = "EX3Heat" # just the name of the vault folder you wish to migrate to git
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "
-vault2Git_script_location = " C:/Python34/Lunch Break/VaultToGit"
+vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"
 
 ###################################################################################################################################################################
 

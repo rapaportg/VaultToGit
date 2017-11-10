@@ -9,7 +9,7 @@ rev_date_array = []
 
 def init():
   
-    tree = ET.parse('temp.xml')
+    tree = ET.parse('C:/Temp/temp.xml')
     root = tree.getroot()
 
     for item in root[0].findall('item'):
