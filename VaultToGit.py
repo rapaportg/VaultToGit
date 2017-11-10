@@ -8,6 +8,9 @@ gitDestination = "Express3-Heat" # The name of the git repo. should be the last 
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
 vaultFolder = "EX3Heat" # change just the name of the vault folder you wish to migrate to git
+vaultUser = "vpuser"
+vaultPasswd = "archive"
+vaultHost = "st-eng"
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
@@ -23,12 +26,13 @@ os.system('git config user.name "Vault"')
 #os.system('git checkout -b ' + branch)
 
 # Grabing the Revision History to use as a guide for cloning each commit
-getRevHistory = "vault VERSIONHISTORY -user vpuser -host st-eng -password archive -repository "
+credentials = " -host " + vaultHost + " -user " + vaultUser + " -password " + vaultPasswd
+getRevHistory = "vault VERSIONHISTORY " + credentials
 beginVersion = " -beginversion 0 "
 RevHistoryLocation = ' "C:/Temp/temp.xml"'
 vaultFolder_full = " $/" + vaultFolder
 
-getRevHistoryCommand = getRevHistory + vaultRepo + beginVersion + vaultFolder_full + " > " + RevHistoryLocation
+getRevHistoryCommand = getRevHistory + " -repository " + vaultRepo + beginVersion + vaultFolder_full + " > " + RevHistoryLocation
 
 #print("\n",getRevHistoryCommand, '\n')
 
@@ -43,7 +47,7 @@ objverid = XmlParser.ObjveridA()
 date = XmlParser.DateA()
 user = XmlParser.UserA()
 
-credentials = " -host st-eng -user vpuser -password archive -repository "
+
 gitDestination_full = " C:/Temp/" + gitDestination
 
 # if the script fails part way through change startVersion to match the last know vault version to be committed to git.
@@ -64,7 +68,7 @@ for x in range(startVersion, loopLength, 1):
 
     git_commit_msg = '"'+ commit_version + "  " + "VaultToGit: " + commit_user +' | ' + commit_date + " | " + commit_message +'"'
 
-    getRepoCommand = "vault GETVERSION" + credentials + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
+    getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
     #print('\n\n', getRepoCommand, '\n\n')
     print('\n\n', git_commit_msg, '\n\n')
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
