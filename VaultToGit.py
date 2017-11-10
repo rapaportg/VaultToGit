@@ -8,9 +8,9 @@ gitDestination = "Express3-Heat" # The name of the git repo. should be the last 
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
 vaultFolder = "EX3Heat" # change just the name of the vault folder you wish to migrate to git
-vaultUser = "vpuser"
-vaultPasswd = "archive"
-vaultHost = "st-eng"
+vaultUser = ""
+vaultPasswd = ""
+vaultHost = ""
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
