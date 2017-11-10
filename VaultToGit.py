@@ -74,7 +74,7 @@ for x in range(startVersion, loopLength, 1):
     os.system(git_commit + 'git --author '+'"'+ commit_user + '<>"')
 
     #print('\n\n', git_commit, '\n')
-    os.system("cd /D " + gitDestination_full + 'git rm *')
+    os.system("cd /D " + gitDestination_full + '&& git rm *')
 
 
 
