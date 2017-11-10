@@ -21,17 +21,12 @@ vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit" 
 os.system('cd /D C:\Temp && git clone ' + git_repo_address)
 os.system('git config user.name "Vault"')
 
-# optional: git branch 
-#branch = "Master"
-#os.system('git checkout -b ' + branch)
-
 # Grabing the Revision History to use as a guide for cloning each commit
 credentials = " -host " + vaultHost + " -user " + vaultUser + " -password " + vaultPasswd
 getRevHistory = "vault VERSIONHISTORY " + credentials
 beginVersion = " -beginversion 0 "
 RevHistoryLocation = ' "C:/Temp/temp.xml"'
 vaultFolder_full = " $/" + vaultFolder
-
 getRevHistoryCommand = getRevHistory + " -repository " + vaultRepo + beginVersion + vaultFolder_full + " > " + RevHistoryLocation
 
 #print("\n",getRevHistoryCommand, '\n')
@@ -46,7 +41,6 @@ txid = XmlParser.TxidA()
 objverid = XmlParser.ObjveridA()
 date = XmlParser.DateA()
 user = XmlParser.UserA()
-
 
 gitDestination_full = " C:/Temp/" + gitDestination
 
