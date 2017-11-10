@@ -60,7 +60,7 @@ for x in range(startVersion, loopLength, 1):
     commit_objverid = str(objverid[x])
     commit_date = str(date[x])
 
-    git_commit_msg = '"'+ commit_version + "  " + "VaultToGit: " + commit_user +' | ' + commit_date + " | " + commit_message +'"'
+    git_commit_msg = '"'+ commit_version + "  " + "VaultToGit: " + commit_date + " | " + commit_message +'"'
 
     getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
     #print('\n\n', getRepoCommand, '\n\n')
