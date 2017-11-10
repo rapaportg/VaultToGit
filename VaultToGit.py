@@ -71,10 +71,10 @@ for x in range(startVersion, loopLength, 1):
 
     os.system("cd /D " + gitDestination_full + " && " + "git add .")
     git_commit = "cd /D " + gitDestination_full + " && "+ " git commit -m " + git_commit_msg
-    os.system(git_commit + 'git --author '+'"'+ commit_user + '<>"')
+    os.system(git_commit + ' --author '+'"'+ commit_user + '<>"')
 
-    #print('\n\n', git_commit, '\n')
-    os.system("cd /D " + gitDestination_full + '&& git rm *')
+    clearWorkingDir = "cd /D " + gitDestination_full + ' && git rm *'
+    os.system(clearWorkingDir)
 
 
 
