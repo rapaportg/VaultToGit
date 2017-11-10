@@ -6,8 +6,8 @@ import XmlParser
 git_repo_address = 'git@st-gitlab:APS/Express3-Heat.git' # The address to the git repo that you wish to move the files in SourceGear Vault to
 gitDestination = "Express3-Heat" # The name of the git repo. should be the last part of the git address minus the .git
 
-vaultRepo = "TableHeat"
-vaultFolder = "EX3Heat" # just the name of the vault folder you wish to migrate to git
+vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
+vaultFolder = "EX3Heat" # change just the name of the vault folder you wish to migrate to git
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"
