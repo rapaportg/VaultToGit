@@ -1,19 +1,19 @@
 import os
 import XmlParser
 import argparse
+from lazyme import color_print
 
 
-
-## change these variables as needed ##############################################################################################################################
+## change these default variables as needed or use command line arguments  ##############################################################################################################################
 
 git_repo_address = 'git@st-gitlab:APS/Express3-Heat.git' # The address to the git repo that you wish to move the files in SourceGear Vault to
 gitDestination = "Express3-Heat" # The name of the git repo. should be the last part of the git address minus the .git
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
 vaultFolder = "EX3Heat" # change just the name of the vault folder you wish to migrate to git
-vaultUser = "vpuser"
-vaultPasswd = "archive"
-vaultHost = "st-eng"
+vaultUser = ""
+vaultPasswd = ""
+vaultHost = ""
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
@@ -22,8 +22,8 @@ vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit" 
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--user", "-u", help="Sourcegear Vault user")
-parser.add_argument("--password", "-p", help="SourceGear Vault password")
+parser.add_argument("--user", "-u", help="Sourcegear Vault user\n")
+parser.add_argument("--password", "-p", help="SourceGear Vault password\n")
 parser.add_argument("--host", help="The host that your SourceGear Vault is located on (eq: localhost)")
 parser.add_argument("--vaultrepo", "-vr", help="SourceGear Vault repo name (eq: RepoName)")
 parser.add_argument("--vaultfolder", "-vf", help="SourceGear Vault folder name (eq: FolderName)")
@@ -119,5 +119,5 @@ for x in range(startVersion, loopLength, 1):
     os.system(clearWorkingDir)
 
 
+print("To push the git repository please go to the directory it is located in review the repo and push manually", color="green")
 
-#os.system("git push")
