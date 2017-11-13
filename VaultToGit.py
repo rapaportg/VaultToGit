@@ -1,5 +1,8 @@
 import os
 import XmlParser
+import argparse
+
+
 
 ## change these variables as needed ##############################################################################################################################
 
@@ -16,6 +19,47 @@ SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
 
 ###################################################################################################################################################################
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("--user", "-u", help="Sourcegear Vault user")
+parser.add_argument("--password", "-p", help="SourceGear Vault password")
+parser.add_argument("--host", help="The host that your SourceGear Vault is located on (eq: localhost)")
+parser.add_argument("--vaultrepo", "-vr", help="SourceGear Vault repo name (eq: RepoName)")
+parser.add_argument("--vaultfolder", "-vf", help="SourceGear Vault folder name (eq: FolderName)")
+parser.add_argument("--gitaddress", "-ga", help="The git repo address that you wish to migrate your SourceGear Vault repo to (eq: git@github.com:rapaportg/VaultToGit.git")
+parser.add_argument("--gitdestination", "-gd", help="The name of the git repo. should be the last part of the git address minus the .git")
+parser.add_argument("--sourcegear_location","-sgl", help="The location of the SourceGear Client on your machine")
+
+args = parser.parse_args()
+
+if args.user:
+    vaultUser = args.user
+
+if args.password:
+    vaultPasswd = args.password
+
+if args.host:
+    vaultHost = args.host
+
+if args.vaultrepo:
+    vaultRepo = args.vaultrepo
+
+if args.vaultfolder:
+    vaultFolder = args.vaultfolder
+
+if args.gitaddress:
+    git_repo_address = args.gitaddress
+
+if args.gitdestination:
+    gitDestination = args.gitdestination
+
+if args.sourcegear_location:
+    SourceGearLocation = args.sourcegear_location
+
+
+
+
 
 # initalizing local git repo
 os.system('cd /D C:\Temp && git clone ' + git_repo_address)
