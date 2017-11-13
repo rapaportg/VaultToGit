@@ -95,7 +95,7 @@ gitDestination_full = " C:/Temp/" + gitDestination
 startVersion = 0
 
 loopLength = len(version)
-color_print('\n\nThere are ', loopLength, ' commits to migrate\n\n', color="blue")
+print('\n\nThere are ', loopLength, ' commits to migrate\n\n')
 
 for x in range(startVersion, loopLength, 1):
     commit_version = str(version[x])
@@ -109,12 +109,13 @@ for x in range(startVersion, loopLength, 1):
 
     getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
     #print('\n\n', getRepoCommand, '\n\n')
-    color_print('\n\n', git_commit_msg, '\n\n', color="yellow")
+    print('\n\n', git_commit_msg, '\n\n')
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
 
-    os.system("cd /D " + gitDestination_full + " && " + "git add .")
-    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit -m " + git_commit_msg
-    os.system(git_commit + ' --author '+'"'+ commit_user + '<>"')
+    os.system("cd /D " + gitDestination_full + " && " + "git add --all .")
+    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit -a -m " + git_commit_msg
+    git_user_email = commit_user+'@autobag.com'
+    os.system(git_commit + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"')
 
     clearWorkingDir = "cd /D " + gitDestination_full + ' && git rm *'
     os.system(clearWorkingDir)
