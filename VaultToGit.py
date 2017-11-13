@@ -18,6 +18,7 @@ vaultHost = ""
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
 
+auto_pusher = 0
 ###################################################################################################################################################################
 
 parser = argparse.ArgumentParser()
@@ -30,6 +31,7 @@ parser.add_argument("--vaultfolder", "-vf", help="SourceGear Vault folder name (
 parser.add_argument("--gitaddress", "-ga", help="The git repo address that you wish to migrate your SourceGear Vault repo to (eq: git@github.com:rapaportg/VaultToGit.git")
 parser.add_argument("--gitdestination", "-gd", help="The name of the git repo. should be the last part of the git address minus the .git")
 parser.add_argument("--sourcegear_location","-sgl", help="The location of the SourceGear Client on your machine")
+parser.add_argument("--auto_push", "-ap", help="set to 0 or 1 if you would like the git repo to automatically push")
 
 args = parser.parse_args()
 
@@ -57,8 +59,8 @@ if args.gitdestination:
 if args.sourcegear_location:
     SourceGearLocation = args.sourcegear_location
 
-
-
+if args.auto_push:
+    auto_pusher = args.auto_push    
 
 
 # initalizing local git repo
@@ -92,9 +94,8 @@ gitDestination_full = " C:/Temp/" + gitDestination
 # vault version are recorded at the beginning of the git commit messages 
 startVersion = 0
 
-
 loopLength = len(version)
-print('\n\nThere are ', loopLength, ' commits to migrate\n\n')
+color_print('\n\nThere are ', loopLength, ' commits to migrate\n\n', color="blue")
 
 for x in range(startVersion, loopLength, 1):
     commit_version = str(version[x])
@@ -108,7 +109,7 @@ for x in range(startVersion, loopLength, 1):
 
     getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
     #print('\n\n', getRepoCommand, '\n\n')
-    print('\n\n', git_commit_msg, '\n\n')
+    color_print('\n\n', git_commit_msg, '\n\n', color="yellow")
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
 
     os.system("cd /D " + gitDestination_full + " && " + "git add .")
@@ -118,6 +119,7 @@ for x in range(startVersion, loopLength, 1):
     clearWorkingDir = "cd /D " + gitDestination_full + ' && git rm *'
     os.system(clearWorkingDir)
 
-
-print("To push the git repository please go to the directory it is located in review the repo and push manually", color="green")
-
+if auto_pusher == 1:
+    os.system("git push origin master")
+else:
+    color_print("To push the git repository please go to the directory it is located in review the repo and push manually", color="green")
