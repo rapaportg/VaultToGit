@@ -1,8 +1,7 @@
-import os
-import XmlParser
 import argparse
+import os
 from lazyme import color_print
-
+import XmlParser
 
 ## change these default variables as needed or use command line arguments  ##############################################################################################################################
 
@@ -105,7 +104,10 @@ for x in range(startVersion, loopLength, 1):
     commit_objverid = str(objverid[x])
     commit_date = str(date[x])
 
-    git_commit_msg = '"'+ commit_version + "  " + "VaultToGit: " + commit_date + " | " + commit_message +'"'
+    git_commit_msg = '"'+ commit_message + "                                                                       " + 'Original Vault commit: version ' + commit_version + " on " + commit_date + "(txid="+commit_txid+')"'
+
+    if(commit_message == "None"):
+        git_commit_msg = '"Original Vault commit version ' + commit_version + " on " + commit_date + " (txid="+commit_txid+')"'
 
     getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
     #print('\n\n', getRepoCommand, '\n\n')
@@ -113,14 +115,16 @@ for x in range(startVersion, loopLength, 1):
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
 
     os.system("cd /D " + gitDestination_full + " && " + "git add --all .")
-    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit -a -m " + git_commit_msg
     git_user_email = commit_user+'@autobag.com'
-    os.system(git_commit + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"')
+    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit" + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"' + " -m " + git_commit_msg
+    
+    os.system("git gc")
+    os.system(git_commit)
 
     clearWorkingDir = "cd /D " + gitDestination_full + ' && git rm *'
     os.system(clearWorkingDir)
 
-if auto_pusher == 1:
+if (auto_pusher == 1):
     os.system("git push origin master")
 else:
     color_print("To push the git repository please go to the directory it is located in review the repo and push manually", color="green")
