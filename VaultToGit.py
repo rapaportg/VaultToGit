@@ -116,7 +116,7 @@ for x in range(startVersion, loopLength, 1):
 
     os.system("cd /D " + gitDestination_full + " && " + "git add --all .")
     git_user_email = commit_user+'@autobag.com'
-    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit" + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"' + " -m " + git_commit_msg
+    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit" + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"' +" --amend --date=" + '"'+ commit_date +'" ' +" -m " + git_commit_msg
     
     os.system("git gc")
     os.system(git_commit)
