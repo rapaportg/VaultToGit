@@ -10,9 +10,9 @@ gitDestination = "Express3-Heat" # The name of the git repo. should be the last 
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
 vaultFolder = "EX3Heat" # change just the name of the vault folder you wish to migrate to git
-vaultUser = ""
-vaultPasswd = ""
-vaultHost = ""
+vaultUser = "vpuser"
+vaultPasswd = "archive"
+vaultHost = "st-eng"
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
 vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
@@ -104,14 +104,16 @@ for x in range(startVersion, loopLength, 1):
     commit_objverid = str(objverid[x])
     commit_date = str(date[x])
 
-    git_commit_msg = '"'+ commit_message + "                                                                       " + 'Original Vault commit: version ' + commit_version + " on " + commit_date + "(txid="+commit_txid+')"'
+    git_commit_msg = '"'+ commit_message + "                                                                         " + 'Original Vault commit: version ' + commit_version + " on " + commit_date + "(txid="+commit_txid+')"'
 
     if(commit_message == "None"):
         git_commit_msg = '"Original Vault commit version ' + commit_version + " on " + commit_date + " (txid="+commit_txid+')"'
 
-    getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
-    #print('\n\n', getRepoCommand, '\n\n')
-    print('\n\n', git_commit_msg, '\n\n')
+    getRepoCommand = "vault GETVERSION -rowlimit 0" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
+    color_print( getRepoCommand, color="blue")
+    print('\n\n')
+    color_print( git_commit_msg,color="yellow")
+    print('\n\n')
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
 
     os.system("cd /D " + gitDestination_full + " && " + "git add --all .")
