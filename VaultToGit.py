@@ -15,7 +15,6 @@ vaultPasswd = "archive"
 vaultHost = "st-eng"
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
-vault2Git_script_location = " C:\Python34\Temp4Git\VaultToGitActive\VaultToGit"  # The location of the VaultToGit.py and XmlParser.py on your machine
 
 auto_pusher = 0
 ###################################################################################################################################################################
@@ -110,16 +109,18 @@ for x in range(startVersion, loopLength, 1):
         git_commit_msg = '"Original Vault commit version ' + commit_version + " on " + commit_date + " (txid="+commit_txid+')"'
 
     getRepoCommand = "vault GETVERSION -rowlimit 0" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
-    color_print( getRepoCommand, color="blue")
-    print('\n\n')
+    #color_print( getRepoCommand, color="pink")
     color_print( git_commit_msg,color="yellow")
-    print('\n\n')
+    
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
 
-    os.system("cd /D " + gitDestination_full + " && " + "git add --all .")
+    os.system("cd /D " + gitDestination_full + " &&  git add . ")
+    os.system("git branch --unset-upstream ")
     git_user_email = commit_user+'@autobag.com'
-    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit" + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"' +" --amend --date=" + '"'+ commit_date +'" ' +" -m " + git_commit_msg
+    git_commit = "cd /D " + gitDestination_full + " && "+ " git commit" + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"' +" --date=" + '"'+ commit_date +'" ' +" -m " + git_commit_msg
     
+    print('\n\n', git_commit, '\n\n')
+
     os.system("git gc")
     os.system(git_commit)
 
@@ -127,6 +128,6 @@ for x in range(startVersion, loopLength, 1):
     os.system(clearWorkingDir)
 
 if (auto_pusher == 1):
-    os.system("git push origin master")
+    os.system("git push -u origin master")
 else:
     color_print("To push the git repository please go to the directory it is located in review the repo and push manually", color="green")
