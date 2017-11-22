@@ -67,13 +67,13 @@ os.system('git config user.name "Vault"')
 
 # Grabing the Revision History to use as a guide for cloning each commit
 credentials = " -host " + vaultHost + " -user " + vaultUser + " -password " + vaultPasswd
-getRevHistory = "vault VERSIONHISTORY " + credentials
+getRevHistory = "vault VERSIONHISTORY  -rowlimit 0 " + credentials
 beginVersion = " -beginversion 0 "
 RevHistoryLocation = ' "C:/Temp/temp.xml"'
 vaultFolder_full = " $/" + vaultFolder
 getRevHistoryCommand = getRevHistory + " -repository " + vaultRepo + beginVersion + vaultFolder_full + " > " + RevHistoryLocation
 
-#print("\n",getRevHistoryCommand, '\n')
+color_print(getRevHistoryCommand, color='blue')
 
 os.system("cd /D " + SourceGearLocation + "&& " + getRevHistoryCommand)
 #os.system("cd /D"+ vault2git_script_location)
@@ -108,8 +108,8 @@ for x in range(startVersion, loopLength, 1):
     if(commit_message == "None"):
         git_commit_msg = '"Original Vault commit version ' + commit_version + " on " + commit_date + " (txid="+commit_txid+')"'
 
-    getRepoCommand = "vault GETVERSION -rowlimit 0" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
-    #color_print( getRepoCommand, color="pink")
+    getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + gitDestination_full
+    color_print( getRepoCommand, color="pink")
     color_print( git_commit_msg,color="yellow")
     
     os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)    
