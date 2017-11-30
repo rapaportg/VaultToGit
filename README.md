@@ -17,7 +17,7 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 - The `vaultRepo`, which is the repository in SourceGear vault you want to access. Its argument variables are `--vaultrepo` or `-vr`. 
 	- Example: `python VaultToGit.py --vaultrepo RepoName`
 - The `vaultFolder`, which is the folder in the vault repo you want to migrate. Its argument are `--vaultfolder` or `-vf`. 
-	- Example: `python VaultToGit.py -vaultfolder RepoFolder`.
+	- Example: `python VaultToGit.py --vaultfolder RepoFolder`.
 
 - The `vaultUser`, which is the username used to log into SourceGear Vault. Its arguements are `--user` or `-u`.
 	- Example: `python VaultToGit.py -u Useranme`
