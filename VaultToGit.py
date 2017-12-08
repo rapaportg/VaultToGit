@@ -11,8 +11,8 @@ gitDestination = "" # The name of the git repo. should be the last part of the g
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
 vaultFolder = "EX3Main" # change just the name of the vault folder you wish to migrate to git
-vaultUser = ""
-vaultPasswd = ""
+vaultUser = "vpuser"
+vaultPasswd = "archive"
 vaultHost = "st-eng"
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
@@ -33,7 +33,7 @@ parser.add_argument("--gitaddress", "-ga", help="The git repo address that you w
 #parser.add_argument("--gitdestination", "-gd", help="The name of the git repo. should be the last part of the git address minus the .git")
 parser.add_argument("--sourcegear_location","-sgl", help="The location of the SourceGear Client on your machine")
 parser.add_argument("--auto_push", "-ap", help="set to 0 or 1 if you would like the git repo to automatically push")
-parser.add_argument("--gitignore", "-gi", help= "input the path to your gitignore file or input a number between 1 and 3 to select on of the default option")
+parser.add_argument("--gitignore", "-gi", help= "input the path to your .gitignore file")
 
 args = parser.parse_args()
 
@@ -65,16 +65,6 @@ if args.auto_push:
     auto_pusher = args.auto_push    
 
 if args.gitignore:
-    if (args.gitignore == "1"):
-        gitIgnoreFile = "iar-k64.gitignore" 
-    
-    if (args.gitignore == "2"):
-        gitIgnoreFile = "iar-vybrid.gitignore"
-
-    if (args.gitignore == "3"):
-        gitIgnoreFile = "mplab.gitignore"
-
-    else: 
         gitIgnoreFile = args.gitignore
 
 
@@ -87,19 +77,11 @@ os.system('git config user.name "Vault"')
 # creating .gitignore
 gitpathcommand = 'cd /D C:\Temp\\' + gitDestination
 
-os.system(gitpathcommand + " && del .gitignore")
+#os.system(gitpathcommand + " && del .gitignore")
 
 gitpath = "copy "+gitIgnoreFile+ " C:\Temp\\"+gitDestination
 color_print(gitpath, color='red')
-os.system("copy C:\Python34\Temp4Git\VaultToGitActive\VaultToGit\mplab.gitignore C:\Temp\\"+gitDestination)
-
-#color_print(gitpathcommand, color='red')
-#os.system("cd /D C:/Temp/"+gitDestination)
-
-gitrename = "cd /D C:/Temp/"+gitDestination+ " && rename "+ gitIgnoreFile + " .gitignore "
-color_print(gitrename, color='red')
-os.system(gitrename)
-
+os.system("copy "+ gitIgnoreFile + " C:\Temp\\"+gitDestination)
 
 # Grabing the Revision History to use as a guide for cloning each commit
 credentials = " -host " + vaultHost + " -user " + vaultUser + " -password " + vaultPasswd
