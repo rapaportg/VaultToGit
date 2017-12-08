@@ -11,8 +11,8 @@ gitDestination = "" # The name of the git repo. should be the last part of the g
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
 vaultFolder = "EX3Main" # change just the name of the vault folder you wish to migrate to git
-vaultUser = "vpuser"
-vaultPasswd = "archive"
+vaultUser = ""
+vaultPasswd = ""
 vaultHost = "st-eng"
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
