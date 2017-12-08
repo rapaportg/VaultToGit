@@ -1,0 +1,11 @@
+[Oo]bj/
+[Bb]in/
+bld/settings/
+bld/bootloader.dep
+src/build_config.h
+*.suo
+*.user
+*.vspscc
+*.vssscc
+*.tmp
+*.log

@@ -1,0 +1,16 @@
+# Object files
+*.o
+*.obj
+
+# Linker output
+*.map
+
+# Libraries
+*.a
+
+# Executables
+*.hex
+*.cof
+
+# IDE generated files
+*.mcs

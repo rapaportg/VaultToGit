@@ -1,0 +1,31 @@
+# IAR project settings directory
+*/settings/
+
+# IAR project output directories
+[Rr]elease/
+[Dd]ebug/
+
+# IAR .dep files
+*.dep
+
+# Compiled Python files
+*.pyc
+
+# IAR output files
+[Oo]bj/
+[Ee]xe/
+[Ll]ist/
+
+# Processor Expert related files
+.metadata/
+RemoteSystemsTempFiles/
+
+# Specific File Excludes
+build_config.h
+build.h
+
+# Python test cache
+python_test/__pycache__
+
+# cyclone image programming files
+cyclone_images
