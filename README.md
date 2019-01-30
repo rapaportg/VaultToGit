@@ -33,7 +33,7 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 
 ###### Optional argument:
 
-- The `auto_pusher`, which is used to toggle auto pushing to git. It accepts a vault of 1 or 0. Its arguments are `--auto_puser` or `-ap`. 
+- The `auto_pusher`, which is used to toggle auto pushing to git. It accepts a value of 1 or 0. Its arguments are `--auto_puser` or `-ap`. 
 	- Example: `python VaultToGit.py -ap 1`
 #### Full Script Call Example:
 	`python VaultToGit.py -u user -p acb123 --host localhost --vaultrepo RepositoryName --vaultfolder FolderName --gitaddress git@gitlab:ABC/Example.git --gitdestination Example -sgl C:\Program Files (x86)\SourceGear\VaultPro Client -ap 0`
