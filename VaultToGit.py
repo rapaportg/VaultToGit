@@ -6,7 +6,7 @@ import gitAdressParser
 
 ## change these default variables as needed or use command line arguments  ##############################################################################################################################
 
-git_repo_address = 'git@st-gitlab:APS/Express3-Main.git' # The address to the git repo that you wish to move the files in SourceGear Vault to
+git_repo_address = 'git@st-gitlab:test/example.git' # The address to the git repo that you wish to move the files in SourceGear Vault to
 gitDestination = "" # The name of the git repo. should be the last part of the git address minus the .git
 
 vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
