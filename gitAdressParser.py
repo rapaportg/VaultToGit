@@ -1,6 +1,6 @@
 #git repo address parser for the git repo name
 
-def gitParser(gitaddress ="git@st-gitlab:APS/Express3-Heat.git"):
+def gitParser(gitaddress ="git@st-gitlab:example.git"):
     count = 0
     newString = ""
     for char in gitaddress:
