@@ -8,6 +8,14 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 #### Example for FW-Hx6146-02 from Vault; adjust as needed for what you are migrating
 `python VaultToGit.py -ga git@github.com:jdkvision/FW-Hx6146-02.git -vr '\"JADAK LLC\"' -vf '\"Engineering/Projects - JADAK/Abstraction/Trunk/Code/FW-Hx6146-02\"' -u jcairns -p <password> --host syr-srv-vault1 -sgl "C:\Program Files (x86)\SourceGear\Vault Client"`
 
+#### To Remove Vault's _sgbak Folders BEFORE Git Commit (run in Windows command prompt in root of project folder)
+
+`FOR /d /r . %d IN (_sgbak) DO @IF EXIST %d rd /s /q "%d"`
+
+#### To Remove Vault's _sgbak Folders AFTER Git Commit (run in Windows command prompt in root of project folder)
+
+`FOR /d /r . %d IN (_sgbak) DO @IF EXIST %d git rm -rf "%d"`
+
 ##### Note: In order to run the script you must either use all the available arguments or change the defaults at the top of the VaultToGit.py script.
 
 
