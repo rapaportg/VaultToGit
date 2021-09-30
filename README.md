@@ -8,6 +8,8 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 #### Example for FW-Hx6146-02 from Vault; adjust as needed for what you are migrating
 `python VaultToGit.py -ga git@github.com:jdkvision/FW-Hx6146-02.git -vr '\"JADAK LLC\"' -vf '\"Engineering/Projects - JADAK/Abstraction/Trunk/Code/FW-Hx6146-02\"' -u jcairns -p <password> --host syr-srv-vault1 -sgl "C:\Program Files (x86)\SourceGear\Vault Client"`
 
+The local git repo will be placed in `C:\Temp\`.  So for the above example, it will be in `C:\Temp\FW-Hx6146-02\`.
+
 #### To Remove Vault's _sgbak Folders BEFORE Git Commit (run in Windows command prompt in root of project folder)
 
 `FOR /d /r . %d IN (_sgbak) DO @IF EXIST %d rd /s /q "%d"`
@@ -23,9 +25,6 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 
 - The `git_repo_address`, which can be modified using the command line argument `--gitaddress` or `-ga`.
 	-  Example: `python  VaultToGit.py --gitaddress git@gitlab:ABC/Example.git`
-
-- The `gitDestination`, which is the name of the file on your local machine that the vault repo will be stored in temporarily. Using the name of the git repo is reccomended. It can be modified using the `--gitdestination` or `-gd` arguments. 
-	- Example: `python VaultToGit.py -gd Example`
 
 - The `vaultRepo`, which is the repository in SourceGear vault you want to access. Its argument variables are `--vaultrepo` or `-vr`. 
 	- Example: `python VaultToGit.py --vaultrepo RepoName`
@@ -48,5 +47,3 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 
 - The `auto_pusher`, which is used to toggle auto pushing to git. It accepts a value of 1 or 0. Its arguments are `--auto_puser` or `-ap`. 
 	- Example: `python VaultToGit.py -ap 1`
-#### Full Script Call Example:
-	`python VaultToGit.py -u user -p acb123 --host localhost --vaultrepo RepositoryName --vaultfolder FolderName --gitaddress git@gitlab:ABC/Example.git --gitdestination Example -sgl C:\Program Files (x86)\SourceGear\VaultPro Client -ap 0`
