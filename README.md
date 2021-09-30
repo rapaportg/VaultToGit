@@ -3,6 +3,11 @@
 
 This script is used to migrate repositories in SourceGear Vault to a Git repository.
 
+### JADAK Example
+
+#### Example for FW-Hx6146-02 from Vault; adjust as needed for what you are migrating
+`python VaultToGit.py -ga git@github.com:jdkvision/FW-Hx6146-02.git -vr '\"JADAK LLC\"' -vf '\"Engineering/Projects - JADAK/Abstraction/Trunk/Code/FW-Hx6146-02\"' -u jcairns -p <password> --host syr-srv-vault1 -sgl "C:\Program Files (x86)\SourceGear\Vault Client"`
+
 ##### Note: In order to run the script you must either use all the available arguments or change the defaults at the top of the VaultToGit.py script.
 
 

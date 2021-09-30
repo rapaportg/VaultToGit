@@ -4,7 +4,7 @@ def gitParser(gitaddress ="git@st-gitlab:example.git"):
     count = 0
     newString = ""
     for char in gitaddress:
-        if (char == '.'):
+        if (count == 1 and char == '.'):
             break
 
         if count == 1:

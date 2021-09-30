@@ -69,6 +69,7 @@ if args.gitignore:
 
 
 gitDestination = gitAdressParser.gitParser(git_repo_address)
+print('gitDestination is: ', gitDestination, '\n')
 
 # initalizing local git repo
 os.system('cd /D C:\Temp && git clone ' + git_repo_address)
@@ -105,6 +106,7 @@ date = XmlParser.DateA()
 user = XmlParser.UserA()
 
 gitDestination_full = " C:/Temp/" + gitDestination
+print('gitDestination_full is: ', gitDestination_full, '\n')
 
 # if the script fails part way through change startVersion to match the last know vault version to be committed to git.
 # vault version are recorded at the beginning of the git commit messages 
