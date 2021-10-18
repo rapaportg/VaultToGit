@@ -3,6 +3,7 @@ import os
 from lazyme import color_print
 import XmlParser
 import gitAdressParser
+import strip_xml_entities
 
 ## change these default variables as needed or use command line arguments  ##############################################################################################################################
 
@@ -88,7 +89,7 @@ os.system("copy "+ gitIgnoreFile + " C:\Temp\\"+gitDestination)
 credentials = " -host " + vaultHost + " -user " + vaultUser + " -password " + vaultPasswd
 getRevHistory = "vault VERSIONHISTORY  -rowlimit 0 " + credentials
 beginVersion = " -beginversion 0 "
-RevHistoryLocation = ' "C:/Temp/temp.xml"'
+RevHistoryLocation = ' "C:/Temp/temp_raw.xml"'
 vaultFolder_full = " $/" + vaultFolder
 getRevHistoryCommand = getRevHistory + " -repository " + vaultRepo + beginVersion + vaultFolder_full + " > " + RevHistoryLocation
 
@@ -96,6 +97,8 @@ color_print(getRevHistoryCommand, color='blue')
 
 os.system("cd /D " + SourceGearLocation + "&& " + getRevHistoryCommand)
 #os.system("cd /D"+ vault2git_script_location)
+
+strip_xml_entities.strip_chars("C:/Temp/temp_raw.xml", "C:/Temp/temp.xml")
 
 XmlParser.init()
 comments = XmlParser.CommentA()
