@@ -100,6 +100,8 @@ os.system("cd /D " + SourceGearLocation + "&& " + getRevHistoryCommand)
 
 strip_xml_entities.strip_chars("C:/Temp/temp_raw.xml", "C:/Temp/temp.xml")
 
+input("Press Enter to continue...")
+
 XmlParser.init()
 comments = XmlParser.CommentA()
 version = XmlParser.VersionA()
