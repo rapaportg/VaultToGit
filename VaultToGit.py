@@ -4,6 +4,7 @@ from lazyme import color_print
 import XmlParser
 import gitAdressParser
 import strip_xml_entities
+import getpass
 
 ## change these default variables as needed or use command line arguments  ##############################################################################################################################
 
@@ -40,27 +41,47 @@ args = parser.parse_args()
 
 if args.user:
     vaultUser = args.user
+else:
+    vaultUser = input( "Enter Your Vault Username: " )
 
 if args.password:
     vaultPasswd = args.password
+else:
+    vaultPasswd = getpass.getpass( "Enter Your Vault Password: " )    
 
 if args.host:
     vaultHost = args.host
+else:
+    vaultHost = input( "Enter Vault Host: (Press Enter to use defualt value of \"syr-srv-vault1\"" )
+    if( "" == vaultHost ):
+        vaultHost = "syr-srv-vault1"    
 
 if args.vaultrepo:
     vaultRepo = args.vaultrepo
+else:
+    vaultRepo = input( "Enter Vault Repo (Press Enter to use defualt value of \"JADAK LLC\"): " )
+    if( "" == vaultRepo ):
+        vaultRepo = "\"JADAK LLC\""    
 
 if args.vaultfolder:
     vaultFolder = args.vaultfolder
+else:
+    vaultFolder = input( "Enter Vault Folder: " )    
 
 if args.gitaddress:
     git_repo_address = args.gitaddress
+else:
+    git_repo_address = input( "Enter git Repo Address: " )
 
 #if args.gitdestination:
     #gitDestination = args.gitdestination
 
 if args.sourcegear_location:
     SourceGearLocation = args.sourcegear_location
+else:
+    SourceGearLocation = input( "Enter SourceGear Location (Press Enter to use defualt value of 'C:\Program Files (x86)\SourceGear\Vault Client'): " )
+    if( "" == SourceGearLocation ):
+        SourceGearLocation = "C:\Program Files (x86)\SourceGear\Vault Client"    
 
 if args.auto_push:
     auto_pusher = args.auto_push    
@@ -68,6 +89,18 @@ if args.auto_push:
 if args.gitignore:
         gitIgnoreFile = args.gitignore
 
+if( not vaultRepo.startswith( "\"" ) ):
+    vaultRepo = "\"" + vaultRepo
+if( not vaultRepo.endswith( "\"" ) ):
+    vaultRepo = vaultRepo + "\""
+if( not vaultFolder.startswith( "\"" ) ):
+    vaultFolder = "\"" + vaultFolder
+if( not vaultFolder.endswith( "\"" ) ):
+    vaultFolder = vaultFolder + "\""
+if( not vaultPasswd.startswith( "\"" ) ):
+    vaultPasswd = "\"" + vaultPasswd
+if( not vaultPasswd.endswith( "\"" ) ):
+    vaultPasswd = vaultPasswd + "\""
 
 gitDestination = gitAdressParser.gitParser(git_repo_address)
 print('gitDestination is: ', gitDestination, '\n')
