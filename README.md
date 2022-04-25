@@ -10,6 +10,8 @@ This script is used to migrate repositories in SourceGear Vault to a Git reposit
 
 The local git repo will be placed in `C:\Temp\`.  So for the above example, it will be in `C:\Temp\FW-Hx6146-02\`.
 
+**NOTE:  You may omit any or all of the command line arguments (e.g. you may just run `python VaultToGit.py`), in which case you will be prompted to provide them interactively.**
+
 #### To Remove Vault's _sgbak Folders BEFORE Git Commit (run in Windows command prompt in root of project folder)
 
 `FOR /d /r . %d IN (_sgbak) DO @IF EXIST %d rd /s /q "%d"`
