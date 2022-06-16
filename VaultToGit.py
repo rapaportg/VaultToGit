@@ -182,8 +182,51 @@ for x in range(startVersion, loopLength, 1):
     os.system("git gc")
     os.system(git_commit)
 
-    clearWorkingDir = "cd /D " + gitDestination_full + ' && git rm .'
-    os.system(clearWorkingDir)
+    if( x + 1 < loopLength ):
+        clearWorkingDir = "cd /D " + gitDestination_full + ' && git rm -r .'
+        os.system(clearWorkingDir)
+
+'''
+# jcairns 06162022: I'm leaving this in, just in case it still proves useful in
+# ths future, but I believe that the fix in the loop above to do a 'git rm -r .'
+# on all but the most recent commit obviates the need to check for and remove
+# any files or folders we have in our git repo that are not in the Vault tips.
+#
+# Remove anything not in the tips
+import tempfile
+import shutil
+
+bRemoved = False
+tipsdir = os.path.join( tempfile.gettempdir(), gitDestination )
+print( "Getting tips of Vault folder to " + tipsdir )
+getRepoCommand = "vault GETVERSION" + credentials +" -repository " + vaultRepo +" "+ commit_version + vaultFolder_full +" " + tipsdir
+os.system("cd /D " + SourceGearLocation + " && " + getRepoCommand)
+os.system("cd /D " + gitDestination_full)
+for filename in os.listdir(gitDestination_full.strip()):
+    if( filename.startswith( ".git" ) ):
+        continue
+    f = os.path.join(tipsdir, filename)
+    if( not os.path.exists( f ) ):
+        bRemoved = True
+        print( "FILE DOES NOT EXIST IN VAULT TIPS: " + filename )
+        print( "REMOVING FROM GIT" )
+        if( os.path.isdir( filename ) ):
+            os.system("git rm -r " + filename)
+        else:
+            os.system("git rm " + filename)
+            
+try:
+    print( "Deleting temporary Vault tips folder " + tipsdir )
+    shutil.rmtree(tipsdir)
+except OSError as e:
+    print("Error: %s : %s" % (tipsdir, e.strerror))
+            
+if( bRemoved ):
+    git_commit = "git commit" + ' --author '+'"'+ commit_user + '<'+ git_user_email +'>"' +" --date=" + '"'+ commit_date +'" ' +" -m Removed files and folders not present in the tips of the Vault folder"    
+    print('\n\n', git_commit, '\n\n')
+    os.system("git gc")
+    os.system(git_commit)    
+'''
 
 if (auto_pusher == 1):
     os.system("git push -u origin master")
