@@ -9,11 +9,11 @@ import gitAdressParser
 git_repo_address = 'git@st-gitlab:test/example.git' # The address to the git repo that you wish to move the files in SourceGear Vault to
 gitDestination = "" # The name of the git repo. should be the last part of the git address minus the .git
 
-vaultRepo = "TableHeat" # change just the name of the vault repo you wish to migrate to git
-vaultFolder = "EX3Main" # change just the name of the vault folder you wish to migrate to git
+vaultRepo = "RepoName" # change just the name of the vault repo you wish to migrate to git
+vaultFolder = "VaultFolderName" # change just the name of the vault folder you wish to migrate to git
 vaultUser = "vpuser"
 vaultPasswd = "archive"
-vaultHost = "st-eng"
+vaultHost = "Hostname"
 
 SourceGearLocation = "C:/Program Files (x86)/SourceGear/VaultPro Client "  # The location of the SourceGear Client on your machine
 
